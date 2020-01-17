@@ -29,7 +29,7 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 defaults write window.titlebarAppearsTransparent true
 
 # スリープやスクリーンセイバーからの復旧時にパスワードを求めるようにする
-defaults write com.apple.screensaver askForPassword -int 1 
+defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Spotlight は使わないので、index を作成しないようにしそれを削除する
@@ -83,6 +83,9 @@ defaults write com.apple.finder ShowPathbar -bool true
 # Tab bar を表示
 defaults write com.apple.finder ShowTabView -bool true
 
+# 画面上部の Menu bar を非表示
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
 # ~/Library フォルダを可視化
 chflags nohidden ~/Library
 
@@ -93,7 +96,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write com.apple.finder AppleShowAllFiles YES
 
 # 「保存」ダイアログのデフォルトを「詳細設定」にする
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true 
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 # ディレクトリ名の翻訳ファイルを削除
 sudo rm -f /Applications/.localized
@@ -137,7 +140,7 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 #defaults write com.apple.dock wvous-tr-corner -int 0
 #defaults write com.apple.dock wvous-tr-modifier -int 0
 
-# Bottom right screen corner 
+# Bottom right screen corner
 #defaults write com.apple.dock wvous-br-corner -int 4
 #defaults write com.apple.dock wvous-br-modifier -int 0
 
@@ -230,6 +233,9 @@ brew install python  # install python3, pip3
 #
 # Ruby
 #
+brew install rbenv
+sudo gem install bundler # global install
+
 
 #
 # Haskell
@@ -242,19 +248,26 @@ brew install python  # install python3, pip3
 
 
 #===============================================================================
-# macOS Apps 
+# macOS Apps
 #===============================================================================
 
 echo ">>> Apps settings"
 
-brew cask install google-chrome slack notion sequel-pro slate alfred iterm2 karabiner-elements
+brew cask install google-chrome slack notion sequel-pro slate alfred iterm2 karabiner-elements sublime-text
 
 # WIP: GHQ style settings
 brew tap motemen/ghq
-brew install ghq fzf tig ag peco yarn 
-brew install neovim/neovim/neovim  
+brew install ghq fzf tig ag peco yarn tree
+brew install neovim/neovim/neovim
+
+if [ ! -e ~/.config/peco ]; then
+  mkdir -p ~/.config/peco
+fi
 
 if [ ! -e ~/.config/nvim ]; then
   mkdir -p ~/.config/nvim
 fi
 
+if [ ! -e ~/.config/tig ]; then
+  mkdir -p ~/.config/tig
+fi
